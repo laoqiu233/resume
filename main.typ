@@ -61,7 +61,7 @@
 #project(
   name: "yap4s",
   url: "github.com/laoqiu233/yap4s",
-  description: "Scala library for parsing natural language search queries (used in bachelor's thesis)",
+  description: "Scala DSL for parser generation (used in bachelor's thesis)",
 )
 - Developed an embedded DSL in Scala for describing context-free grammars.
 - Implemented a modified Aho-Corasick algorithm for efficient lexical analysis.
