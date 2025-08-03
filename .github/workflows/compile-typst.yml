@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Compile Typst Files
+      uses: ammar-ahmed22/compile-typst-action@v1
+      with:
+        source_paths: './main.typ'
+        output_paths: 'out/resume.pdf'
+    - name: Upload pdf artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: 'dmitritsiu_resume'
+        path: 'out/resume.pdf'
