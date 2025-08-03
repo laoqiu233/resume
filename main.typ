@@ -6,7 +6,6 @@
 #let github = "github.com/laoqiu233"
 #let phone = "+7 (924) 100 31 39"
 
-
 #show: resume.with(
   author: name,
   location: location,
