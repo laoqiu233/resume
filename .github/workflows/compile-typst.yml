@@ -13,14 +13,23 @@ jobs:
   compile:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Compile Typst Files
-      uses: ammar-ahmed22/compile-typst-action@v1
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Typst
+      uses: lvignoli/typst-action@main
       with:
-        source_paths: './main.typ'
-        output_paths: 'out/resume.pdf'
-    - name: Upload pdf artifacts
+        source_file: main.typ
+    - name: Upload PDF file
       uses: actions/upload-artifact@v4
       with:
-        name: 'dmitritsiu_resume'
-        path: 'out/resume.pdf'
+        name: PDF
+        path: *.pdf
+    - name: Get current date
+      id: date
+      run: echo "DATE=$(date +%Y-%m-%d-%H:%M)" >> $GITHUB_ENV
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: github.ref_type == 'tag'
+      with:
+        name: "${{ github.ref_name }} — ${{ env.DATE }}"
+        files: main.pdf
